@@ -8,9 +8,13 @@
 import Foundation
 
 struct TodoListItem: Codable, Identifiable {
-    var id: String
-    var title: String
-    var dueDate: TimeInterval
-    var createDate: TimeInterval
+    let id: String
+    let title: String
+    let dueDate: TimeInterval
+    let createDate: TimeInterval
     var isDone: Bool
+    
+    mutating func setDone(_ state: Bool) {
+        isDone = state
+    }
 }

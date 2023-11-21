@@ -28,7 +28,7 @@ struct ListView: View {
             }
             .sheet(isPresented: $viewmodel.isPresented,
                    content: {
-                NewItemView()
+                NewItemView(isNewItemPresented: $viewmodel.isPresented)
             })
         }
         

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewItemView: View {
     @StateObject var viewmodel = NewItemViewModel()
+    @Binding var isNewItemPresented: Bool
     
     var body: some View {
         VStack {
@@ -24,14 +25,28 @@ struct NewItemView: View {
                     .datePickerStyle(GraphicalDatePickerStyle())
                 
                 CustomButtonView(title: "Save", backgroundColor: .orange) {
-                    viewmodel.save()
+                    if viewmodel.canSave {
+                        viewmodel.save()
+                        isNewItemPresented = false
+                    } else {
+                        viewmodel.showAlert = true
+                    }
                 }
                 .padding(.vertical, 20)
             }
+            .alert(isPresented: $viewmodel.showAlert,
+                   content: {
+                Alert(title: Text("Error"),
+                      message: Text("Fill in all fields"))
+            })
         }
     }
 }
 
 #Preview {
-    NewItemView()
+    NewItemView(isNewItemPresented: Binding(get: {
+        return true
+    }, set: { _ in
+        
+    }))
 }
