@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class ListViewModel: ObservableObject {
+    @Published var isPresented = false
+    
+    init() {}
+}

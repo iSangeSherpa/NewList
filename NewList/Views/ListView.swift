@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ListView: View {
+    
+    @StateObject var viewmodel = ListViewModel()
     var body: some View {
         
         NavigationView {
@@ -19,10 +21,15 @@ struct ListView: View {
             .toolbar {
                 Button {
                     // action on pressing the button
+                    viewmodel.isPresented = true
                 } label: {
                     Image(systemName: "plus")
                 }
             }
+            .sheet(isPresented: $viewmodel.isPresented,
+                   content: {
+                NewItemView()
+            })
         }
         
     }
